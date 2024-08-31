@@ -11,6 +11,10 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    const ROLE_PARENT = 'parent';
+    const ROLE_PROFESSIONAL = 'professional';
+    const ROLE_ADMIN = 'admin';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -20,6 +24,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -43,5 +48,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Child::class, 'parent_id');
+    }
+
+    public function assignedChildren()
+    {
+        return $this->belongsToMany(Child::class, 'child_professional', 'professional_id', 'child_id');
     }
 }
