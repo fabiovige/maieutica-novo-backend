@@ -1,0 +1,146 @@
+{
+	"info": {
+		"_postman_id": "e0be78eb-f7b5-42af-b814-b0f9b70f8e29",
+		"name": "Maieutica-NOVO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1984537"
+	},
+	"item": [
+		{
+			"name": "all users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "show user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update user",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Eduardo Nunes\",\r\n    \"email\": \"eduardo@gmail.com\",\r\n    \"role\": \"admin\",\r\n    \"phone\": \"(11)963270717\",\r\n    \"cep\": \"06410250\",\r\n    \"address\": \"Rua Ipiranga\",\r\n    \"number\": \"342\",\r\n    \"complement\": \"Apto 15 A\",\r\n    \"neighborhood\": \"Vila Barros\",\r\n    \"city\": \"Barueri\",\r\n    \"state\": \"SP\",\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/users/182",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"users",
+						"182"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Eduardo Nunes\",\r\n    \"email\": \"eduardo@gmail.com\",\r\n    \"role\": \"admin\",\r\n    \"phone\": \"(11)963270717\",\r\n    \"cep\": \"06410250\",\r\n    \"address\": \"Rua Ipiranga\",\r\n    \"number\": \"342\",\r\n    \"complement\": \"Apto 15 A\",\r\n    \"neighborhood\": \"Vila Barros\",\r\n    \"city\": \"Barueri\",\r\n    \"state\": \"SP\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
