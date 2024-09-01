@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Exception;
@@ -11,11 +12,24 @@ use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
+    protected $userService;
+        
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+    
     public function index(Request $request)
     {
         try {
-            $perPage = $request->input('per_page', 10); // Itens por página, default: 15
-            $users = User::paginate($perPage);
+            $filters = $request->only([
+                'name', 'email', 'role', 'phone', 'cep', 
+                'address', 'number', 'complement', 'neighborhood', 
+                'city', 'state'
+            ]);
+
+            $perPage = $request->input('per_page', 10);
+            $users = $this->userService->getUsers($filters, $perPage);
             return response()->json($users);
         } catch (Exception $e) {
             return response()->json(['error' => 'Failed to fetch users.'], 500);
