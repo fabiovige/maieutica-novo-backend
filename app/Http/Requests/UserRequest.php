@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UserRequest extends FormRequest
 {
@@ -11,11 +13,29 @@ class UserRequest extends FormRequest
         return true;
     }
 
+    /**
+     * Summary of failedValidation
+     *
+     * @throws \Illuminate\Http\Exceptions\HttpResponseException
+     */
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'status' => false,
+            'errors' => $validator->errors(),
+        ], 422));
+    }
+
+    /**
+     * Summary of rules
+     */
     public function rules(): array
     {
+        $userId = $this->route('user');
+        
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $this->route('user'),
+            'email' => 'required|email|unique:users,email,'.($userId ? $userId->id : null),
             'password' => $this->isMethod('post') ? 'required|string|min:8' : 'sometimes|nullable|string|min:8',
             'role' => 'required|in:parent,professional,admin',
             'phone' => 'nullable|string|max:15',
@@ -29,7 +49,12 @@ class UserRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    /**
+     * Summary of messages
+     *
+     * @return string[]
+     */
+    public function messages(): string|array
     {
         return [
             'name.required' => 'O nome é obrigatório.',
