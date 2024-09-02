@@ -12,7 +12,9 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     const ROLE_PARENT = 'parent';
+
     const ROLE_PROFESSIONAL = 'professional';
+
     const ROLE_ADMIN = 'admin';
 
     /**
@@ -33,7 +35,7 @@ class User extends Authenticatable
         'complement',
         'neighborhood',
         'city',
-        'state',        
+        'state',
     ];
 
     /**
