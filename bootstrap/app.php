@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -15,9 +16,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->statefulApi();
     })
     ->withExceptions(function (Exceptions $exceptions) {
+
+        // NotFoundHttpException
         $exceptions->render(function(NotFoundHttpException $e, Request $request){
             if($e->getPrevious() instanceof ModelNotFoundException){
                 return response()->json([
@@ -25,5 +28,15 @@ return Application::configure(basePath: dirname(__DIR__))
                     'message' => 'Registro não encontrado!'
                 ], 404);
             }
+        });
+
+        // AuthenticationException
+        $exceptions->render(function(AuthenticationException $e){
+            
+            return response()->json([
+                'status' => false,
+                'message' => 'Credenciais incorretas!'
+            ], 404);
+        
         });
     })->create();
