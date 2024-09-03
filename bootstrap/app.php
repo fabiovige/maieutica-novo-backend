@@ -15,28 +15,26 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware) {
-        
-    })
+    ->withMiddleware(function (Middleware $middleware) {})
     ->withExceptions(function (Exceptions $exceptions) {
 
         // NotFoundHttpException
-        $exceptions->render(function(NotFoundHttpException $e, Request $request){
-            if($e->getPrevious() instanceof ModelNotFoundException){
+        $exceptions->render(function (NotFoundHttpException $e, Request $request) {
+            if ($e->getPrevious() instanceof ModelNotFoundException) {
                 return response()->json([
                     'status' => false,
-                    'message' => 'Registro não encontrado!'
+                    'message' => 'Registro não encontrado!',
                 ], 404);
             }
         });
 
         // AuthenticationException
-        $exceptions->render(function(AuthenticationException $e){
-            
+        $exceptions->render(function (AuthenticationException $e) {
+
             return response()->json([
                 'status' => false,
-                'message' => 'Credenciais incorretas!'
+                'message' => 'Credenciais incorretas!',
             ], 404);
-        
+
         });
     })->create();

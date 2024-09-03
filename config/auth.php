@@ -112,4 +112,8 @@ return [
 
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
+    'policies' => [
+        \App\Models\User::class => \App\Policies\UserPolicy::class,
+        // Registre outras policies aqui...
+    ],
 ];
