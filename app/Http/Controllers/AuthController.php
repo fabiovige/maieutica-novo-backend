@@ -50,7 +50,7 @@ class AuthController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'status' => false,
-                'message' => 'Dados incorretos!',
+                'message' => 'Credenciais incorretas!',
             ], 401);
         }
     }
